@@ -9,7 +9,6 @@ cuff
 TSS.filename <- "TSS_TAIR_only.data"
 ISO.filename <- "Isoform_TAIR_only.data"
 
-
 ##############################
 # some basic quality control #
 ##############################
@@ -152,7 +151,6 @@ for (i in 1:l) {
 #motif = isoform.gene.info[isoform.gene.info[,1] %in% P.id.2.sig,]
 
 
-
 #############################
 # analysis on isoform level #
 #############################
@@ -161,7 +159,6 @@ for (i in 1:l) {
 # isoform id,gene id, TAIR gene name, TSS, class code, TAIR transcript, length
 isoform.info<-annotation(isoforms(cuff))[,c(1,2,4,5,6,7,9)]
 
-#
 # fpkm values
 i.fpkm = fpkm(isoforms(cuff))
 
@@ -171,7 +168,7 @@ for (i in sample.names) {
   names(fpkm.data) <- c("isoform_id", paste("isoform.fpkm",i,sep="."))
   isoform.info <- merge(isoform.info, fpkm.data, by="isoform_id")
 }
-#
+
 # expressed isoforms
 for (i in sample.names) {
   i.expressed <- i.fpkm[i.fpkm$sample_name==i,]
@@ -251,7 +248,6 @@ detach(isoform.gene.info)
 # TSS id,gene id
 TSS.info <- unique(isoform.info[,c(4,2)])
 
-#
 # fpkm values
 TSS.fpkm = fpkm(TSS(cuff))
 
@@ -261,7 +257,7 @@ for (i in sample.names) {
   names(fpkm.data) <- c("TSS_group_id", paste("TSS.fpkm",i,sep="."))
   TSS.info <- merge(TSS.info, fpkm.data, by="TSS_group_id")
 }
-#
+
 # expressed TSSs
 for (i in sample.names) {
   TSS.expressed <- TSS.fpkm[TSS.fpkm$sample_name==i,]
@@ -353,9 +349,9 @@ TSS.gene.info2 <- merge(r.TSS, n.TSS_groups, by="gene_id")
 
 #write.table(isoform.gene.info2, "ISO.filename_v2", sep=",", row.names=FALSE)
 
-####################################
-# Graph for paper these 3 into 1 graph   #
-####################################
+########################################
+# Graph for paper these 3 into 1 graph
+#########################################
 #  XLOC_012987 = AT2G33815 = cis-natural antisense       
 #  XLOC_006584 = AT1G48742 = MICRORNA157D,
 #  XLOC_010258 = At2g33810 = SPL3 
